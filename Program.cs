@@ -112,24 +112,16 @@ namespace programme_poo
     {
         static void Main(string[] args)
         {
-            /*Personne personne1 = new Personne("Paul", 30);
-            personne1.Afficher();*/
 
-            // Console.WriteLine("nom personne1 : " + personne1.nom);
+            var personnes = new List<Personne> 
+            { 
+                new Personne("Paul", 30, "Développeur"), 
+                new Personne("Jacques", 35, "Professeur"), 
+                new Etudiant("David", 20, "Philosophie"), 
+                new Enfant("Juliette", 8, "CP", null), 
+            };
 
-            /*Personne personne2 = new Personne("Jacques", 35, "Professeur");
-            personne2.Afficher();*/
-
-            /*            var personnes = new List<Personne> { 
-                            new Personne("Paul", 30, "Développeur"), 
-                            new Personne("Jacques", 35, "Professeur"), 
-                            new Personne("David", 35, "Etudiant"), 
-                            new Personne("Juliette", 35, "CP"), 
-                        };*/
-
-            // personnes = personnes.OrderBy(p => p.nom).ToList(); // ici on a pu trier par nom parce qu'on a mis nom en public
-
-            /*foreach (var personne in personnes)
+            foreach (var personne in personnes)
             {
                 personne.Afficher();
             }
@@ -138,9 +130,10 @@ namespace programme_poo
 
             // var personne1 = new Personne { nom = "Paul", age=30, emploi = "Ingénieur" };
 
-            var professeur = new Personne("Jacques", 36, "Professeur");
+            // var professeur = new Personne("Jacques", 36, "Professeur");
+            Personne professeur = null;
 
-            var etudiant = new Etudiant("David", 20, "école d'ingénieur informatique") {
+            var etudiant = new Etudiant("David2", 20, "école d'ingénieur informatique") {
                 professeurPrincipal = professeur
             };
             
@@ -152,7 +145,7 @@ namespace programme_poo
                 { "Maths", 5f }, { "Geo", 8.5f }, { "Dictée", 3.3f }
             };
 
-            var enfant = new Enfant("Sophie", 7, "CP", notesEnfant1)
+            var enfant = new Enfant("Sophie", 7, "CP", new Dictionary<string, float>())
             {
                 professeurPrincipal = professeur
             };
