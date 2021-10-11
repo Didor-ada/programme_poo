@@ -42,7 +42,8 @@ namespace programme_poo
             this.infoEtudes = infoEtudes;
         }
 
-        public override void Afficher() // cette fonction surcharge une fonction venant de la classe aprent
+        //new public void Afficher()
+        public override void Afficher() // cette fonction surcharge une fonction venant de la classe parent
         {
             AfficherNomEtAge();
             Console.WriteLine(" Etudiant en " + infoEtudes);
@@ -65,8 +66,8 @@ namespace programme_poo
 
         static int nombreDePersonnes = 0; // quand on met static, on aura qu'une seule variable qui va se créer pour la classe sinon on créé des variables pour toutes les personnes. // marche comme une variable globale
 
-        protected string nom; // protected rend la variable utilisable dans les classes dérivées (ou enfants)
-        protected int age;
+        public string nom { get; init; } // protected rend la variable utilisable dans les classes dérivées (ou enfants)
+        public int age { get; init; }
         string emploi;
 
         protected int numeroPersonne;
@@ -121,35 +122,19 @@ namespace programme_poo
                 new Enfant("Juliette", 8, "CP", null), 
             };
 
+            // Where
+            // personnes = personnes.OrderBy(p => p.nom).ToList();
+
+            // personnes = personnes.Where(p => p.age >= 25).ToList(); / ici on choppe les éléments de la liste qui ont plus de 25 ans
+
+            // personnes = personnes.Where(p => p is Etudiant).ToList(); / ici on obtient aussi Enfant car c'est une dérivé de Etudiant
+
+            // personnes = personnes.Where(p => (p.nom[0] == 'J') && (p.age > 30)).ToList(); / nom commençant par J et supérieur à 30 ans
+
             foreach (var personne in personnes)
             {
                 personne.Afficher();
             }
-
-            Personne.AfficherNombreDePersonnes(); // en mettant le nom de la classe avant la variable static pour y accéder, vu que c'est une variable de classe*/
-
-            // var personne1 = new Personne { nom = "Paul", age=30, emploi = "Ingénieur" };
-
-            // var professeur = new Personne("Jacques", 36, "Professeur");
-            Personne professeur = null;
-
-            var etudiant = new Etudiant("David2", 20, "école d'ingénieur informatique") {
-                professeurPrincipal = professeur
-            };
-            
-
-            etudiant.Afficher();
-
-            var notesEnfant1 = new Dictionary<string, float>
-            {
-                { "Maths", 5f }, { "Geo", 8.5f }, { "Dictée", 3.3f }
-            };
-
-            var enfant = new Enfant("Sophie", 7, "CP", new Dictionary<string, float>())
-            {
-                professeurPrincipal = professeur
-            };
-            enfant.Afficher();
             
         }
     }
