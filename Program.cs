@@ -61,7 +61,7 @@ namespace programme_poo
 
     }
 
-    class Personne
+    class Personne : IAffichable
     {
 
         static int nombreDePersonnes = 0; // quand on met static, on aura qu'une seule variable qui va se créer pour la classe sinon on créé des variables pour toutes les personnes. // marche comme une variable globale
@@ -109,17 +109,46 @@ namespace programme_poo
             Console.WriteLine("Nombre total de personnes : " + nombreDePersonnes);
         }
     }
+
+    class TableMultiplication : IAffichable
+    {
+        int numero;
+        public TableMultiplication(int numero)
+        {
+            this.numero = numero;
+        }
+
+        public void Afficher()
+        {
+            Console.WriteLine("Table du multiplication de " + numero);
+
+            for (int i = 1; i <= 10; i++)
+            {
+                Console.WriteLine(i + " x " + numero + " = " + (i*numero));
+            }
+        }
+    }
+
+    interface IAffichable
+    {
+        void Afficher();
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
 
-            var personnes = new List<Personne> 
+            // Personne -> Etudiant -> Enfant (Afficher)
+            // TableMultiplication (Afficher)
+
+            var elements = new List<IAffichable> 
             { 
                 new Personne("Paul", 30, "Développeur"), 
                 new Personne("Jacques", 35, "Professeur"), 
                 new Etudiant("David", 20, "Philosophie"), 
-                new Enfant("Juliette", 8, "CP", null), 
+                new Enfant("Juliette", 8, "CP", null),
+                new TableMultiplication(2)
             };
 
             // Where
@@ -131,10 +160,13 @@ namespace programme_poo
 
             // personnes = personnes.Where(p => (p.nom[0] == 'J') && (p.age > 30)).ToList(); / nom commençant par J et supérieur à 30 ans
 
-            foreach (var personne in personnes)
+            foreach (var element in elements)
             {
-                personne.Afficher();
+                element.Afficher();
             }
+
+            /*var table2 = new TableMultiplication(2);
+            table2.Afficher();*/
             
         }
     }
